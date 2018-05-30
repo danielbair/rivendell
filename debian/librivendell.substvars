@@ -1,0 +1,2 @@
+shlibs:Depends=libc6 (>= 2.14), libcdparanoia0 (>= 3.10.2+debian), libcurl3 (>= 7.16.2), libflac++6 (>= 1.3.0), libflac8 (>= 1.3.0), libgcc1 (>= 1:4.1.1), libid3-3.8.3c2a, libpam0g (>= 0.99.7.1), libqt3-mt (>= 3:3.3.8b), librivendell, libsamplerate0 (>= 0.1.7), libsndfile1 (>= 1.0.20), libsoundtouch0 (>= 1.7.1-3~), libstdc++6 (>= 4.1.1), libvorbisfile3 (>= 1.1.2)
+misc:Depends=

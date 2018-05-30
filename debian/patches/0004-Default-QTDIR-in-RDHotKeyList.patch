@@ -1,0 +1,40 @@
+From: Alban Peignier <alban@tryphon.eu>
+Date: Sat, 23 Jun 2012 10:51:08 +0200
+Subject: Default QTDIR in RDHotKeyList
+
+---
+ lib/Makefile.am      | 6 +++---
+ lib/rdhotkeylist.cpp | 5 +++--
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/lib/Makefile.am b/lib/Makefile.am
+index 49fc7d7..f8af02c 100644
+--- a/lib/Makefile.am
++++ b/lib/Makefile.am
+@@ -22,7 +22,7 @@
+ ##
+ ## Use automake to process this into a Makefile.in
+ 
+-AM_CPPFLAGS = -Wall -DPREFIX=\"$(prefix)\" @QT_CXXFLAGS@ -Wno-strict-aliasing
++AM_CPPFLAGS = -Wall -DPREFIX=\"$(prefix)\" -DQTDIR=\"@QT_DIR@\" @QT_CXXFLAGS@ -Wno-strict-aliasing
+ MOC = @QT_MOC@
+ CWRAP = ../helpers/cwrap
+ 
+diff --git a/lib/rdhotkeylist.cpp b/lib/rdhotkeylist.cpp
+index c755667..bfcee79 100644
+--- a/lib/rdhotkeylist.cpp
++++ b/lib/rdhotkeylist.cpp
+@@ -50,9 +50,10 @@ void RDHotKeyList::BuildKeyList( )
+   char *p = {0};
+ 
+   if(getenv("QTDIR")==NULL) {
+-    return;
++    strcpy(qtpath, QTDIR);
++  } else {
++    strcpy(qtpath, (const char *) getenv("QTDIR"));
+   }
+-  strcpy(qtpath, (const char *) getenv("QTDIR"));
+   strcpy(keyfile,qtpath);
+   strcat(keyfile,"/include/qnamespace.h");
+   hkeyfile = fopen(keyfile,"r");
+

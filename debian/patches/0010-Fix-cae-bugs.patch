@@ -1,0 +1,84 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ rivendell (2.19.2-1ubuntu1) unstable; urgency=medium
+ .
+   * New upstream release
+   * Fix cae complie bug.
+Author: Daniel Bair <daniel@danielbair.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: 2018-04-17
+
+--- rivendell-2.19.2.orig/cae/cae_alsa.cpp
++++ rivendell-2.19.2/cae/cae_alsa.cpp
+@@ -1140,7 +1140,7 @@ bool MainObject::alsaSetInputVolume(int
+ {
+ #ifdef ALSA
+   if(level>-10000) {
+-    alsa_input_volume[card][stream]=pow10((double)level/2000.0);
++    alsa_input_volume[card][stream]=pow(10.0,(double)level/2000.0);
+     alsa_input_volume_db[card][stream]=level;
+   }
+   else {
+@@ -1158,7 +1158,7 @@ bool MainObject::alsaSetOutputVolume(int
+ {
+ #ifdef ALSA
+   if(level>-10000) {
+-    alsa_output_volume[card][port][stream]=pow10((double)level/2000.0);
++    alsa_output_volume[card][port][stream]=pow(10.0,(double)level/2000.0);
+     alsa_output_volume_db[card][port][stream]=level;
+   }
+   else {
+@@ -1366,7 +1366,7 @@ bool MainObject::alsaSetPassthroughLevel
+ #ifdef ALSA
+   if(level>-10000) {
+     alsa_passthrough_volume[card][in_port][out_port]=
+-      pow10((double)level/2000.0);
++      pow(10.0,(double)level/2000.0);
+     alsa_passthrough_volume_db[card][in_port][out_port]=level;
+   }
+   else {
+--- rivendell-2.19.2.orig/cae/cae_jack.cpp
++++ rivendell-2.19.2/cae/cae_jack.cpp
+@@ -1062,7 +1062,7 @@ bool MainObject::jackSetInputVolume(int
+   }
+   if(level>-10000) {
+     jack_input_volume[stream]=
+-      (jack_default_audio_sample_t)pow10((double)level/2000.0);
++      (jack_default_audio_sample_t)pow(10.0,(double)level/2000.0);
+     jack_input_volume_db[stream]=level;
+   }
+   else {
+@@ -1085,7 +1085,7 @@ bool MainObject::jackSetOutputVolume(int
+   }
+   if(level>-10000) {
+     jack_output_volume[port][stream]=
+-      (jack_default_audio_sample_t)pow10((double)level/2000.0);
++      (jack_default_audio_sample_t)pow(10.0,(double)level/2000.0);
+     jack_output_volume_db[port][stream]=level;
+   }
+   else {
+@@ -1306,7 +1306,7 @@ bool MainObject::jackSetPassthroughLevel
+   }
+   if(level>-10000) {
+     jack_passthrough_volume[in_port][out_port]=
+-      (jack_default_audio_sample_t)pow10((double)level/2000.0);
++      (jack_default_audio_sample_t)pow(10.0,(double)level/2000.0);
+     jack_passthrough_volume_db[in_port][out_port]=level;
+   }
+   else {

@@ -1,0 +1,21 @@
+From: Alban Peignier <alban@tryphon.eu>
+Date: Sat, 27 Aug 2011 15:33:28 +0200
+Subject: Remove debian directories from Makefile list
+
+---
+ configure.ac | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index ca86df1..afdd9cc 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -537,8 +537,6 @@ AC_CONFIG_FILES([rivendell.spec \
+     docs/tables/Makefile \
+     xdg/rivendell-opsguide-html.desktop \
+     xdg/rivendell-opsguide-pdf.desktop \
+-    debian/Makefile \
+-    debian/patches/Makefile \
+     xdg/Makefile \
+     rdadmin/Makefile \
+     scripts/Makefile \

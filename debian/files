@@ -1,0 +1,4 @@
+rivendell_2.19.2-1trusty2_amd64.deb sound optional
+rivendell-server_2.19.2-1trusty2_amd64.deb sound optional
+librivendell_2.19.2-1trusty2_amd64.deb sound optional
+rivendell-doc_2.19.2-1trusty2_all.deb doc optional

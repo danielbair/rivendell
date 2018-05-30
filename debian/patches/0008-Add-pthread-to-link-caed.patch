@@ -1,0 +1,22 @@
+From: Alban Peignier <alban@tryphon.eu>
+Date: Sat, 1 Nov 2014 15:00:53 +0100
+Subject: Add pthread to link caed
+
+---
+ cae/Makefile.am | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/cae/Makefile.am b/cae/Makefile.am
+index 48ed5ae..7130bec 100644
+--- a/cae/Makefile.am
++++ b/cae/Makefile.am
+@@ -45,7 +45,8 @@ caed_LDADD = @LIB_RDLIBS@\
+              @LIBHPI@\
+              @LIBJACK@\
+              @LIBSRC@\
+-             @LIBVORBIS@
++             @LIBVORBIS@\
++             -lpthread
+ 
+ CLEANFILES = *~\
+              moc_*

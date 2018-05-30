@@ -1,0 +1,22 @@
+From: Alban Peignier <alban@tryphon.eu>
+Date: Sat, 15 Nov 2014 20:30:11 +0100
+Subject: Pull Request 42 - Improve log save performance issue
+
+---
+ lib/rdlog_event.cpp | 64 +++++++++++++++++++++++++++++++----------------------
+ lib/rdlog_event.h   |  2 ++
+ 2 files changed, 40 insertions(+), 26 deletions(-)
+
+diff --git a/lib/rdlog_event.h b/lib/rdlog_event.h
+index 46ae3f5..0c55b8d 100644
+--- a/lib/rdlog_event.h
++++ b/lib/rdlog_event.h
+@@ -75,6 +75,8 @@ class RDLogEvent
+   private:
+    int LoadLines(const QString &log_table,int id_offset,bool track_ptrs);
+    void SaveLine(int line);
++   void InsertLines(QString values);
++   void InsertLineValues(QString *query, int line);
+    void LoadNowNext(unsigned from_line);
+    QString log_name;
+    QString log_service_name;
