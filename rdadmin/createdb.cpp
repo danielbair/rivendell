@@ -425,7 +425,6 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "ARTIST char(255),"+
     "ALBUM char(255),"+
     "YEAR date,"+
-    "ISRC char(12),"+
     "CONDUCTOR char(64),"+
     "LABEL char(64),"+
     "CLIENT char(64),"+
@@ -612,8 +611,6 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "TFC_CART_LENGTH int,"+
     "TFC_TITLE_OFFSET int,"+
     "TFC_TITLE_LENGTH int,"+
-    "TFC_START_OFFSET int,"+
-    "TFC_START_LENGTH int,"+
     "TFC_HOURS_OFFSET int,"+
     "TFC_HOURS_LENGTH int,"+
     "TFC_MINUTES_OFFSET int,"+
@@ -647,8 +644,6 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "MUS_CART_LENGTH int,"+
     "MUS_TITLE_OFFSET int,"+
     "MUS_TITLE_LENGTH int,"+
-    "MUS_START_OFFSET int,"+
-    "MUS_START_LENGTH int,"+
     "MUS_HOURS_OFFSET int,"+
     "MUS_HOURS_LENGTH int,"+
     "MUS_MINUTES_OFFSET int,"+
@@ -721,20 +716,14 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "STATION char(40) not null,"+
     "INSTANCE int unsigned not null,"+
     "INPUT_CARD int default 0,"+
-    "INPUT_STREAM int default 0,"+
     "INPUT_PORT int default 0,"+
     "INPUT_TYPE enum('A','D') default 'A',"+
     "OUTPUT_CARD int default 0,"+
-    "OUTPUT_STREAM int default 0,"+
     "OUTPUT_PORT int default 0,"+
     "VOX_THRESHOLD int default -5000,"+
     "TRIM_THRESHOLD int default 0,"+
-    "RECORD_GPI int default -1,"+
-    "PLAY_GPI int default -1,"+
-    "STOP_GPI int default -1,"+
     "DEFAULT_FORMAT int unsigned default 0,"+
     "DEFAULT_CHANNELS int unsigned default 2,"+
-    "DEFAULT_SAMPRATE int unsigned default 44100,"+
     "DEFAULT_LAYER int unsigned default 0,"+
     "DEFAULT_BITRATE int unsigned default 0,"+
     "DEFAULT_RECORD_MODE int unsigned default 0,"+
@@ -807,7 +796,6 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "PORT_TYPE enum('A','D') default 'A',"+
     "DEFAULT_FORMAT int default 0,"+
     "DEFAULT_CHANNELS int default 2,"+
-    "DEFAULT_SAMPRATE int default 44100,"+
     "DEFAULT_BITRATE int default 0,"+
     "DEFAULT_THRESHOLD int default 0,"+
     "SWITCH_STATION char(64),"+
@@ -862,7 +850,6 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "EVENTDATE_OFFSET int default 0,"+
     "FORMAT int default 0,"+
     "CHANNELS int default 2,"+
-    "SAMPRATE int default 44100,"+
     "BITRATE int default 0,"+
     "QUALITY int default 0,"+
     "MACRO_CART int default -1,"+
@@ -991,50 +978,8 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
   sql=QString("create table if not exists RDAIRPLAY (")+
     "ID int not null primary key auto_increment,"+
     "STATION char(40) not null,"+
-    "CARD0 int default 0,"+
-    "PORT0 int default 0,"+
-    "START_RML0 char(255),"+
-    "STOP_RML0 char(255),"+
-    "CARD1 int default 0,"+
-    "PORT1 int default 0,"+
-    "START_RML1 char(255),"+
-    "STOP_RML1 char(255),"+
-    "CARD2 int default 0,"+
-    "PORT2 int default 0,"+
-    "START_RML2 char(255),"+
-    "STOP_RML2 char(255),"+
-    "CARD3 int default 0,"+
-    "PORT3 int default 0,"+
-    "START_RML3 char(255),"+
-    "STOP_RML3 char(255),"+
-    "CARD4 int default 0,"+
-    "PORT4 int default 0,"+
-    "START_RML4 char(255),"+
-    "STOP_RML4 char(255),"+
-    "CARD5 int default 0,"+
-    "PORT5 int default 0,"+
-    "START_RML5 char(255),"+
-    "STOP_RML5 char(255),"+
-    "CARD6 int default 0,"+
-    "PORT6 int default 0,"+
-    "START_RML6 char(255),"+
-    "STOP_RML6 char(255),"+
-    "CARD7 int default 0,"+
-    "PORT7 int default 0,"+
-    "START_RML7 char(255),"+
-    "STOP_RML7 char(255),"+
-    "CARD8 int default 0,"+
-    "PORT8 int default 0,"+
-    "START_RML8 char(255),"+
-    "STOP_RML8 char(255),"+
-    "CARD9 int default 0,"+
-    "PORT9 int default 0,"+
-    "START_RML9 char(255),"+
-    "STOP_RML9 char(255),"+
     "SEGUE_LENGTH int default 250,"+
     "TRANS_LENGTH int default 50,"+
-    "OP_MODE int default 2,"+
-    "START_MODE int default 0,"+
     "LOG_MODE_STYLE int default 0,"+
     "PIE_COUNT_LENGTH int default 15000,"+
     "PIE_COUNT_ENDPOINT int default 0,"+
@@ -1102,8 +1047,8 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "PORT_TYPE int default 0,"+
     "PORT_TYPE_2 int default 0,"+
     "CARD int default -1,"+
-    "PORT int not null,"+
-    "PORT_2 int not null,"+
+    "PORT int not null default 0,"+
+    "PORT_2 int not null default 0,"+
     "IP_ADDRESS char(16),"+
     "IP_ADDRESS_2 char(16),"+
     "IP_PORT int,"+
@@ -1117,10 +1062,10 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "START_CART_2 int unsigned,"+
     "STOP_CART_2 int unsigned,"+
     "GPIO_DEVICE char(255),"+
-    "INPUTS int not null,"+
-    "OUTPUTS int not null,"+
-    "GPIS int not null,"+
-    "GPOS int not null,"+
+    "INPUTS int not null default 0,"+
+    "OUTPUTS int not null default 0,"+
+    "GPIS int not null default 0,"+
+    "GPOS int not null default 0,"+
     "FADERS int default 0,"+
     "DISPLAYS int default 0,"+
     "index MATRIX_IDX (STATION_NAME,MATRIX))"+
@@ -1425,7 +1370,6 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
     "OUTPUT_CARD int default -1,"+
     "OUTPUT_PORT int default 0,"+
     "FORMAT int unsigned default 0,"+
-    "SAMPRATE int unsigned default 44100,"+
     "LAYER int unsigned default 0,"+
     "BITRATE int unsigned default 0,"+
     "ENABLE_SECOND_START enum('N','Y') default 'Y',"+
@@ -1509,31 +1453,6 @@ bool CreateDb(QString name,QString pwd,RDConfig *config)
   sql=QString("create table if not exists RDPANEL (")+
     "ID int not null primary key auto_increment,"+
     "STATION char(40) not null,"+
-    "INSTANCE int unsigned not null,"+
-    "CARD2 int default 0,"+
-    "PORT2 int default 0,"+
-    "START_RML2 char(255),"+
-    "STOP_RML2 char(255),"+
-    "CARD3 int default 0,"+
-    "PORT3 int default 0,"+
-    "START_RML3 char(255),"+
-    "STOP_RML3 char(255),"+
-    "CARD6 int default 0,"+
-    "PORT6 int default 0,"+
-    "START_RML6 char(255),"+
-    "STOP_RML6 char(255),"+
-    "CARD7 int default 0,"+
-    "PORT7 int default 0,"+
-    "START_RML7 char(255),"+
-    "STOP_RML7 char(255),"+
-    "CARD8 int default 0,"+
-    "PORT8 int default 0,"+
-    "START_RML8 char(255),"+
-    "STOP_RML8 char(255),"+
-    "CARD9 int default 0,"+
-    "PORT9 int default 0,"+
-    "START_RML9 char(255),"+
-    "STOP_RML9 char(255),"+
     "STATION_PANELS int default 3,"+
     "USER_PANELS int default 3,"+
     "CLEAR_FILTER enum('N','Y') default 'N',"+
@@ -8393,6 +8312,177 @@ int UpdateDb(int ver,RDConfig *config)
     }
 
     sql=QString("drop table AUDIO_PORTS");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+  }
+
+  if(ver<284) {
+    sql=QString("alter table RDAIRPLAY drop column INSTANCE");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    for(int i=0;i<10;i++) {
+      sql=QString("alter table RDAIRPLAY ")+
+	QString().sprintf("drop column CARD%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDAIRPLAY ")+
+	QString().sprintf("drop column PORT%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDAIRPLAY ")+
+	QString().sprintf("drop column START_RML%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDAIRPLAY ")+
+	QString().sprintf("drop column STOP_RML%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+    }
+
+    sql=QString("alter table RDAIRPLAY drop column OP_MODE");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RDAIRPLAY drop column START_MODE");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+
+    sql=QString("alter table RDPANEL drop column INSTANCE");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    for(int i=2;i<4;i++) {
+      sql=QString("alter table RDPANEL ")+
+	QString().sprintf("drop column CARD%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDPANEL ")+
+	QString().sprintf("drop column PORT%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDPANEL ")+
+	QString().sprintf("drop column START_RML%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDPANEL ")+
+	QString().sprintf("drop column STOP_RML%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+    }
+
+    for(int i=6;i<10;i++) {
+      sql=QString("alter table RDPANEL ")+
+	QString().sprintf("drop column CARD%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDPANEL ")+
+	QString().sprintf("drop column PORT%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDPANEL ")+
+	QString().sprintf("drop column START_RML%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+
+      sql=QString("alter table RDPANEL ")+
+	QString().sprintf("drop column STOP_RML%d",i);
+      q=new RDSqlQuery(sql,false);
+      delete q;
+    }
+
+    sql=QString("alter table MATRICES alter column PORT set default 0");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table MATRICES alter column PORT_2 set default 0");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table MATRICES alter column INPUTS set default 0");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table MATRICES alter column OUTPUTS set default 0");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table MATRICES alter column GPIS set default 0");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table MATRICES alter column GPOS set default 0");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table REPLICATORS alter column TYPE_ID set default 0");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+  }
+
+  if(ver<285) {
+    sql=QString("alter table CART drop column ISRC");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table DECKS drop column DEFAULT_SAMPRATE");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RDLIBRARY drop column INPUT_STREAM");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RDLIBRARY drop column OUTPUT_STREAM");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RDLIBRARY drop column RECORD_GPI");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RDLIBRARY drop column PLAY_GPI");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RDLIBRARY drop column STOP_GPI");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RDLIBRARY drop column DEFAULT_SAMPRATE");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RDLOGEDIT drop column SAMPRATE");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table RECORDINGS drop column SAMPRATE");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table SERVICES drop column TFC_START_OFFSET");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table SERVICES drop column TFC_START_LENGTH");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table SERVICES drop column MUS_START_OFFSET");
+    q=new RDSqlQuery(sql,false);
+    delete q;
+
+    sql=QString("alter table SERVICES drop column MUS_START_LENGTH");
     q=new RDSqlQuery(sql,false);
     delete q;
   }
